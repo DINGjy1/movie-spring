@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dldx.dao.UserDao">
+
+    <!--  查询
+       id:对应的是dao中的方法的名称
+       retuleType:可以访完全限定名 包名+类名  也可以放别名
+
+     -->
+    <select id="getAllUsers" resultType="com.dldx.pojo.User">
+        select id,name,pwd
+        from user
+    </select>
+
+    <select id="getUserByUserNo" resultType="user">
+        select id,name,pwd
+        from user where id=#{id}
+    </select>
+
+    <delete id="deleteUser" >
+        delete from user where id=#{id}
+    </delete>
+
+    <insert id="addUser" parameterType="user">
+        insert into user(name,pwd)
+        values(#{name},#{pwd})
+    </insert>
+
+    <select id="getUser" resultType="user">
+        select * from user
+        where name=#{name} and pwd=#{pwd}
+    </select>
+
+    <update id="updateUser" parameterType="user">
+        update user set name=#{name},pwd=#{pwd}
+        where id=#{id}
+    </update>
+
+    <!--注意参数赋值 等号前不能加空格-->
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dldx.dao.FilmDao">
+
+    <!--  查询
+       id:对应的是dao中的方法的名称
+       retuleType:可以访完全限定名 包名+类名  也可以放别名
+
+     -->
+    <select id="getAllFilms" resultType="com.dldx.pojo.Film">
+        select filmNo,name,country,director,role,category,grade,profile
+        from film
+    </select>
+
+    <select id="getFilmByFilmNo" resultType="film">
+        select filmNo,name,country,director,role,category,grade,profile
+        from film where filmNo=#{filmNo}
+    </select>
+
+    <delete id="deleteFilm" >
+        delete from film where filmNo=#{filmNo}
+    </delete>
+
+    <insert id="addFilm" parameterType="film">
+        insert into film(name,country,director,role,category,grade,profile)
+        values(#{name},#{country},#{director},#{role},#{category},#{grade},#{profile})
+    </insert>
+
+    <update id="updateFilm" parameterType="film">
+        update film set name=#{name},country=#{country},director=#{director},role=#{role},category=#{category},grade=#{grade},profile=#{profile}
+        where filmNo=#{filmNo}
+    </update>
+
+    <!--注意参数赋值 等号前不能加空格-->
+</mapper>

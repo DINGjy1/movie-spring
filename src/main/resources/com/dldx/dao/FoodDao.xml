@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dldx.dao.FoodDao">
+
+    <!--  查询
+       id:对应的是dao中的方法的名称
+       retuleType:可以访完全限定名 包名+类名  也可以放别名
+
+     -->
+    <select id="getAllFoods" resultType="com.dldx.pojo.Food">
+        select foodNo,foodName,price,stock
+        from food
+    </select>
+
+    <select id="getFoodByFoodNo" resultType="food">
+        select foodNo,foodName,price,stock
+        from food where foodNo=#{foodNo}
+    </select>
+
+    <delete id="deleteFood" >
+        delete from food where foodNo=#{foodNo}
+    </delete>
+
+    <insert id="addFood" parameterType="food">
+        insert into food(foodName,price,stock)
+        values(#{foodName},#{price},#{stock})
+    </insert>
+
+    <update id="updateFood" parameterType="food">
+        update food set foodName=#{foodName},price=#{price},stock=#{stock}
+        where foodNo=#{foodNo}
+    </update>
+
+    <!--注意参数赋值 等号前不能加空格-->
+</mapper>

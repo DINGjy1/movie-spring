@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dldx.dao.GoodsDao">
+
+    <!--  查询
+     id 跟方法名一一对象
+     -->
+    <select id="getAllGoods" resultType="com.dldx.pojo.Goods">
+        select id,goodsName,catId,price,picPath,description from food
+    </select>
+
+    <select id="getGoodsById" resultType="goods">
+        select id,goodsName,catId,price,picPath,description from food where id=#{id}
+    </select>
+
+    <update id="updateGoods" parameterType="com.dldx.pojo.Goods">
+        update food
+        set catId=#{catId},goodsName=#{goodsName},description=#{description},
+            picPath=#{picPath},price=#{price} where id=#{id}
+    </update>
+    <insert id="addGoods" parameterType="com.dldx.pojo.Goods">
+        insert into food(catId,goodsName,description,picPath,price)
+        values(#{catId},#{goodsName},#{description},#{picPath},#{price})
+    </insert>
+
+    <delete id="deleteGoods">
+        delete from food where id=#{id}
+    </delete>
+
+    <!--注意参数赋值 等号前不能加空格-->
+</mapper>

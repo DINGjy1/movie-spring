@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dldx.dao.BookDao">
+
+    <!--  查询
+       id:对应的是dao中的方法的名称
+       retuleType:可以访完全限定名 包名+类名  也可以放别名
+
+     -->
+    <select id="getAllBooks" resultType="com.dldx.pojo.Book">
+        select bookNo,bookName,price,author,publisher
+        from book
+    </select>
+
+    <select id="getBookByBookNo" resultType="book">
+        select bookNo,bookName,price,author,publisher
+        from book where bookNo=#{bookNo}
+    </select>
+
+    <delete id="deleteBook" >
+        delete from book where bookNo=#{bookNo}
+    </delete>
+
+    <insert id="addBook" parameterType="book">
+        insert into book(bookName,price,author,publisher)
+        values(#{bookName},#{price},#{author},#{publisher})
+    </insert>
+
+    <update id="updateBook" parameterType="book">
+        update book set bookName=#{bookName},price=#{price},author=#{author},publisher=#{publisher}
+        where bookNo=#{bookNo}
+    </update>
+
+    <!--注意参数赋值 等号前不能加空格-->
+</mapper>
